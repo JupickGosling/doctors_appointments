@@ -62,11 +62,51 @@ class HomeScreen extends StatelessWidget{
                             backgroundImage: 
                             AssetImage("images/man.png"),
                           ),
+                          Icon(
+                            Icons.notifications_outlined,
+                            color: wColor,
+                            size: 30,
+                          ),
                         ],
+                      ),
+                      SizedBox(height: 15),
+                      Text(
+                        "Hi, programmer",
+                        style: TextStyle(
+                          color: wColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "Your Health is Our\nFirst Priority",
+                        style: TextStyle(
+                          color: wColor,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 15, bottom: 20),
+                        width: MediaQuery.of(context).size.width,
+                        height: 55,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: wColor,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: sdColor,
+                              blurRadius: 6,
+                              spreadRadius: 3,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
+                  ),
                 ],
               ),
             ),
