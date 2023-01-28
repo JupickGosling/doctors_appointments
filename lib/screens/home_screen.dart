@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget{
                           CircleAvatar(
                             radius: 30, 
                             backgroundImage: 
-                            AssetImage("images/man.png"),
+                            AssetImage("images/user.png"),
                           ),
                           Icon(
                             Icons.notifications_outlined,
