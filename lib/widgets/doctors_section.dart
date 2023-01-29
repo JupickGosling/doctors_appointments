@@ -1,4 +1,5 @@
 import 'package:doctors_appointments/colors.dart';
+import 'package:doctors_appointments/screens/appoint_screen.dart';
 import 'package:flutter/material.dart';
 
 class DoctorsSection extends StatelessWidget{
@@ -34,7 +35,11 @@ class DoctorsSection extends StatelessWidget{
                     Stack(
                       children: [
                         InkWell(
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => AppointScreen(),
+                            ));
+                          },
                           child: ClipRRect(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(15),
@@ -77,7 +82,7 @@ class DoctorsSection extends StatelessWidget{
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Dr. Lonney",
+                          "Dr. Looney",
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.w500,
@@ -85,7 +90,7 @@ class DoctorsSection extends StatelessWidget{
                           ),
                         ),
                         Text(
-                          "Surgeon",
+                          "Врач хирург",
                           style: TextStyle(
                             fontSize: 18,
                             color: bColor.withOpacity(0.6),

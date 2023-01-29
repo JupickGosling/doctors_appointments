@@ -1,4 +1,5 @@
 import 'package:doctors_appointments/colors.dart';
+import 'package:doctors_appointments/screens/welcome_screen.dart';
 import 'package:doctors_appointments/widgets/doctors_section.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -6,11 +7,12 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 class HomeScreen extends StatelessWidget{
 
   List catNames = [
-    "Dental",
-    "Heart",
-    "Eye",
-    "Brain",
-    "Ear",
+    "Стоматол.",
+    "Кардиол.",
+    "Окулист",
+    "Невролог",
+    "ЛОР",
+    "Хирург",
   ];
 
   List<Icon> catIcons = [
@@ -19,7 +21,12 @@ class HomeScreen extends StatelessWidget{
     Icon(MdiIcons.eye, color: pColor, size: 30,),
     Icon(MdiIcons.brain, color: pColor, size: 30,),
     Icon(MdiIcons.earHearing, color: pColor, size: 30,),
+    Icon(MdiIcons.stomach, color: pColor, size: 30,),
   ];
+
+  // List<IconButton> catIcon = [
+  //   IconButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen()))}, icon: const Icon(MdiIcons.toothOutline), color: pColor, iconSize: 30)
+  // ];
   
   @override
   Widget build(BuildContext context){
