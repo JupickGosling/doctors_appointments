@@ -47,9 +47,7 @@ class AppointScreen extends StatelessWidget{
                         children: [
                           InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => HomeScreen(),
-                              ));
+                              Navigator.pop(context);
                             },
                             child: Container(
                               margin: EdgeInsets.all(8),
@@ -219,6 +217,62 @@ class AppointScreen extends StatelessWidget{
                   ),
                   SizedBox(height: 15),
                   Text(
+                    "Дата записи",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: bColor.withOpacity(0.6),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Container(
+                    height: 70,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 6,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                              child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+                                decoration: BoxDecoration(
+                                  color: index == 1 ? pColor : Color(0xFFF2F8FF),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: sdColor,
+                                      blurRadius: 4,
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("${index+8}",
+                                      style: TextStyle(
+                                        color: index == 1 ? wColor : bColor.withOpacity(0.6),
+                                      ),
+                                    ),
+                                    Text("Янв",
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500,
+                                        color: index == 1 
+                                        ? wColor 
+                                        : bColor.withOpacity(0.6),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
                     "Время записи",
                     style: TextStyle(
                       fontSize: 18,
@@ -234,18 +288,59 @@ class AppointScreen extends StatelessWidget{
                       scrollDirection: Axis.horizontal,
                       itemCount: 6,
                       itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 25),
-                              decoration: BoxDecoration(
-                                color: index == 1 ? pColor : Color(0xFFF2F8FF)
+                        return InkWell(
+                              child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                                decoration: BoxDecoration(
+                                  color: index == 2 ? pColor : Color(0xFFF2F8FF),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: sdColor,
+                                      blurRadius: 4,
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "${index + 8}:00 AM",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: index == 2
+                                      ? wColor 
+                                      : bColor.withOpacity(0.6),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
-                        );
+                            );
                       },
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Material(
+                    color: pColor,
+                    borderRadius: BorderRadius.circular(10),
+                    child: InkWell(
+                      onTap: () {
+                        
+                      },
+                      child: Container(
+                        height: 60,
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(
+                          child: Text(
+                            "Записаться на прием",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: wColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
