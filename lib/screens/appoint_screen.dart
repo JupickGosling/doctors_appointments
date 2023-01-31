@@ -3,9 +3,9 @@ import 'package:doctors_appointments/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class AppointScreen extends StatelessWidget{
+class AppointScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Material(
       color: Color(0xFFF2F8FF),
       child: SingleChildScrollView(
@@ -46,7 +46,7 @@ class AppointScreen extends StatelessWidget{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pop(context);
                             },
                             child: Container(
@@ -207,7 +207,8 @@ class AppointScreen extends StatelessWidget{
                     ],
                   ),
                   SizedBox(height: 15),
-                  Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                  Text(
+                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
@@ -233,41 +234,42 @@ class AppointScreen extends StatelessWidget{
                       itemCount: 6,
                       itemBuilder: (context, index) {
                         return InkWell(
-                              child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                                decoration: BoxDecoration(
-                                  color: index == 1 ? pColor : Color(0xFFF2F8FF),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: sdColor,
-                                      blurRadius: 4,
-                                      spreadRadius: 2,
-                                    ),
-                                  ],
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 5),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 25),
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF2F8FF),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: sdColor,
+                                  blurRadius: 4,
+                                  spreadRadius: 2,
                                 ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("${index+8}",
-                                      style: TextStyle(
-                                        color: index == 1 ? wColor : bColor.withOpacity(0.6),
-                                      ),
-                                    ),
-                                    Text("Янв",
-                                      style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500,
-                                        color: index == 1 
-                                        ? wColor 
-                                        : bColor.withOpacity(0.6),
-                                      ),
-                                    ),
-                                  ],
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "${index + 8}",
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
                                 ),
-                              ),
-                            );
+                                Text(
+                                  "Янв",
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -289,33 +291,32 @@ class AppointScreen extends StatelessWidget{
                       itemCount: 6,
                       itemBuilder: (context, index) {
                         return InkWell(
-                              child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                                decoration: BoxDecoration(
-                                  color: index == 2 ? pColor : Color(0xFFF2F8FF),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: sdColor,
-                                      blurRadius: 4,
-                                      spreadRadius: 2,
-                                    ),
-                                  ],
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 5),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 5),
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF2F8FF),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: sdColor,
+                                  blurRadius: 4,
+                                  spreadRadius: 2,
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    "${index + 8}:00 AM",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: index == 2
-                                      ? wColor 
-                                      : bColor.withOpacity(0.6),
-                                    ),
-                                  ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                "${index + 8}:00 AM",
+                                style: TextStyle(
+                                  fontSize: 18,
                                 ),
                               ),
-                            );
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -324,9 +325,7 @@ class AppointScreen extends StatelessWidget{
                     color: pColor,
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
-                      onTap: () {
-                        
-                      },
+                      onTap: () {},
                       child: Container(
                         height: 60,
                         width: MediaQuery.of(context).size.width,
