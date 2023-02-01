@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "749031033893",
+    "project_id": "doctors-appointments-11baa",
+    "storage_bucket": "doctors-appointments-11baa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749031033893:android:30dfe0b13cb4942b8843cc",
+        "android_client_info": {
+          "package_name": "com.example.doctors_appointments"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749031033893-iuev5pmmaitp1fknrv0sp8fvqdf7n296.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqiqsOaoazEeSPpGzAJSAoq_v_HJ0jQgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749031033893-iuev5pmmaitp1fknrv0sp8fvqdf7n296.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

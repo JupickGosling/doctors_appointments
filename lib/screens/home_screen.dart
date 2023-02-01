@@ -1,11 +1,11 @@
 import 'package:doctors_appointments/colors.dart';
 import 'package:doctors_appointments/screens/welcome_screen.dart';
 import 'package:doctors_appointments/widgets/doctors_section.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class HomeScreen extends StatelessWidget{
-
+class HomeScreen extends StatelessWidget {
   List catNames = [
     "Стоматол.",
     "Кардиол.",
@@ -16,20 +16,48 @@ class HomeScreen extends StatelessWidget{
   ];
 
   List<Icon> catIcons = [
-    Icon(MdiIcons.toothOutline, color: pColor, size: 30,),
-    Icon(MdiIcons.heartPlus, color: pColor, size: 30,),
-    Icon(MdiIcons.eye, color: pColor, size: 30,),
-    Icon(MdiIcons.brain, color: pColor, size: 30,),
-    Icon(MdiIcons.earHearing, color: pColor, size: 30,),
-    Icon(MdiIcons.stomach, color: pColor, size: 30,),
+    Icon(
+      MdiIcons.toothOutline,
+      color: pColor,
+      size: 30,
+    ),
+    Icon(
+      MdiIcons.heartPlus,
+      color: pColor,
+      size: 30,
+    ),
+    Icon(
+      MdiIcons.eye,
+      color: pColor,
+      size: 30,
+    ),
+    Icon(
+      MdiIcons.brain,
+      color: pColor,
+      size: 30,
+    ),
+    Icon(
+      MdiIcons.earHearing,
+      color: pColor,
+      size: 30,
+    ),
+    Icon(
+      MdiIcons.stomach,
+      color: pColor,
+      size: 30,
+    ),
   ];
+
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
 
   // List<IconButton> catIcon = [
   //   IconButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen()))}, icon: const Icon(MdiIcons.toothOutline), color: pColor, iconSize: 30)
   // ];
-  
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Material(
       color: Color(0xFFD9E4EE),
       child: SingleChildScrollView(
@@ -58,85 +86,92 @@ class HomeScreen extends StatelessWidget{
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CircleAvatar(
-                            radius: 30, 
-                            backgroundImage: 
-                            AssetImage("images/user.png"),
-                          ),
-                          Icon(
-                            Icons.notifications_outlined,
-                            color: wColor,
-                            size: 30,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      Text(
-                        "Hi, Programmer",
-                        style: TextStyle(
-                          color: wColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        "Ваше Здоровье – Наш\nГлавный Приоритет",
-                        style: TextStyle(
-                          color: wColor,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 15, bottom: 20),
-                        width: MediaQuery.of(context).size.width,
-                        height: 55,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: wColor,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: sdColor,
-                              blurRadius: 6,
-                              spreadRadius: 3,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundImage: AssetImage("images/user.png"),
+                            ),
+                            SizedBox(width: 190),
+                            Icon(
+                              Icons.notifications_outlined,
+                              color: wColor,
+                              size: 30,
+                            ),
+                            IconButton(
+                              onPressed: signUserOut,
+                              icon: Icon(Icons.logout_outlined),
+                              color: wColor,
+                              iconSize: 30,
                             ),
                           ],
                         ),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Поиск...",
-                            hintStyle: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                            ),
-                            prefixIcon: Icon(
-                              Icons.search,
-                              size: 25,
+                        SizedBox(height: 15),
+                        Text(
+                          "Hi, Programmer",
+                          style: TextStyle(
+                            color: wColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Ваше Здоровье – Наш\nГлавный Приоритет",
+                          style: TextStyle(
+                            color: wColor,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 15, bottom: 20),
+                          width: MediaQuery.of(context).size.width,
+                          height: 55,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: wColor,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: sdColor,
+                                blurRadius: 6,
+                                spreadRadius: 3,
+                              ),
+                            ],
+                          ),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Поиск...",
+                              hintStyle: TextStyle(
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                size: 25,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 15),
                     child: Text(
-                      "Категории", 
+                      "Категории",
                       style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: bColor.withOpacity(0.7),
-                    ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: bColor.withOpacity(0.7),
+                      ),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -146,11 +181,12 @@ class HomeScreen extends StatelessWidget{
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: catNames.length,
-                      itemBuilder: (context, index){
+                      itemBuilder: (context, index) {
                         return Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 15),
                               height: 60,
                               width: 60,
                               decoration: BoxDecoration(
@@ -184,14 +220,12 @@ class HomeScreen extends StatelessWidget{
                   SizedBox(height: 10),
                   Padding(
                     padding: EdgeInsets.only(left: 15),
-                    child: Text(
-                      "Рекомендуемые врачи",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: bColor.withOpacity(0.7),
-                      )
-                    ),
+                    child: Text("Рекомендуемые врачи",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: bColor.withOpacity(0.7),
+                        )),
                   ),
                   DoctorsSection(),
                 ],
