@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.doctors_appointments">
    <application
-        android:label="doctors_appointments"
+        android:label="Запись на прием"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/doctor">
         <activity
             android:name=".MainActivity"
             android:exported="true"
