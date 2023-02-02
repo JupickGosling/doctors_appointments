@@ -1,4 +1,5 @@
 import 'package:doctors_appointments/screens/home_screen.dart';
+import 'package:doctors_appointments/screens/login_or_register.dart';
 import 'package:doctors_appointments/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,7 +19,7 @@ class AuthScreen extends StatelessWidget {
           }
 
           else{
-            return LoginScreen();
+            return LoginOrRegisterScreen();
           }
         },
       ),

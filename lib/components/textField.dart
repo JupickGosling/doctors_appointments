@@ -5,12 +5,14 @@ class MyTextField extends StatelessWidget {
   final controller;
   final String hintText;
   final bool obscureText;
+  final keyboardType;
 
   const MyTextField({
     super.key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
+    required this.keyboardType,
   });
 
   @override
@@ -25,13 +27,15 @@ class MyTextField extends StatelessWidget {
             borderSide: BorderSide(color: wColor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gColor),
+            borderSide: BorderSide(color: pColor),
           ),
+          
           fillColor: gsColor,
           filled: true,
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey[500]),
         ),
+        keyboardType: keyboardType,
       ),
     );
   }

@@ -2,30 +2,42 @@ import 'package:doctors_appointments/colors.dart';
 import 'package:doctors_appointments/colors.dart';
 import 'package:doctors_appointments/components/button.dart';
 import 'package:doctors_appointments/components/textField.dart';
-import 'package:doctors_appointments/screens/forgot_pass.dart';
 import 'package:doctors_appointments/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   final Function()? onTap;
-  const LoginScreen({
+  RegisterScreen({
     super.key,
     required this.onTap,
   });
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreen();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreen extends State<RegisterScreen> {
   final emailController = TextEditingController();
-
   final passworController = TextEditingController();
+  final ageController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final firstNameController = TextEditingController();
 
-  void signUserIn() async {
+  @override
+  void dispose(){
+    emailController.dispose();
+    passworController.dispose();
+    ageController.dispose();
+    lastNameController.dispose();
+    firstNameController.dispose();
+    super.dispose();
+  }
+
+  Future signUserUp() async {
     showDialog(
       context: context,
       builder: (context) {
@@ -35,9 +47,15 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passworController.text,
+      );
+      addUserDetails(
+        lastNameController.text,
+        firstNameController.text,
+        emailController.text,
+        int.parse(ageController.text),
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -47,6 +65,16 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
     Navigator.pop(context);
+  }
+
+  Future addUserDetails(
+      String lastName, String firstName, String email, int age) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'Last name': lastName,
+      'First name': firstName,
+      'email': email,
+      'age': age,
+    });
   }
 
   void alertErrorEmail() {
@@ -111,11 +139,6 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SingleChildScrollView(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Icon(
-                Icons.lock,
-                size: 100,
-              ),
-              const SizedBox(height: 30),
               const Text(
                 "Welcome!",
                 style: TextStyle(
@@ -128,6 +151,27 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 25),
               MyTextField(
+                controller: firstNameController,
+                hintText: "Фамилия",
+                obscureText: false,
+                keyboardType: TextInputType.text,
+              ),
+              const SizedBox(height: 20),
+              MyTextField(
+                controller: lastNameController,
+                hintText: "Имя",
+                obscureText: false,
+                keyboardType: TextInputType.text,
+              ),
+              const SizedBox(height: 20),
+              MyTextField(
+                controller: ageController,
+                hintText: "Возраст",
+                obscureText: false,
+                keyboardType: TextInputType.phone,
+              ),
+              const SizedBox(height: 20),
+              MyTextField(
                 controller: emailController,
                 hintText: "Email",
                 obscureText: false,
@@ -136,39 +180,14 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
               MyTextField(
                 controller: passworController,
-                hintText: "Password",
+                hintText: "Пароль",
                 obscureText: true,
                 keyboardType: TextInputType.text,
               ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const ForgotPassScreen();
-                            },
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        "Забыли пароль?",
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: 25),
               MyButton(
-                text: "Войти",
-                onTap: signUserIn,
+                text: "Зарегистрироваться",
+                onTap: signUserUp,
               ),
               const SizedBox(height: 10),
               Padding(
@@ -177,14 +196,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Нет аккаунта?",
+                      "Уже есть аккаунт?",
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                     const SizedBox(width: 5),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
-                        "Зарегистрироваться.",
+                        "Войти.",
                         style: TextStyle(color: Colors.blue),
                       ),
                     ),
