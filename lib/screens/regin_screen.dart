@@ -151,14 +151,14 @@ class _RegisterScreen extends State<RegisterScreen> {
               ),
               const SizedBox(height: 25),
               MyTextField(
-                controller: firstNameController,
+                controller: lastNameController,
                 hintText: "Фамилия",
                 obscureText: false,
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(height: 20),
               MyTextField(
-                controller: lastNameController,
+                controller: firstNameController,
                 hintText: "Имя",
                 obscureText: false,
                 keyboardType: TextInputType.text,
