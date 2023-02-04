@@ -325,7 +325,11 @@ class AppointScreen extends StatelessWidget {
                     color: pColor,
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                  //       Navigator.push(context, MaterialPageRoute(
+                  //   builder: (context) => ,
+                  // ));
+                      },
                       child: Container(
                         height: 60,
                         width: MediaQuery.of(context).size.width,

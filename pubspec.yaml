@@ -45,6 +45,11 @@ dependencies:
   intl: ^0.17.0
   curved_navigation_bar: ^1.0.3
   line_icons: ^2.0.1
+  nb_utils: ^5.0.4
+  badges: ^3.0.2
+  flutter_iconly: ^1.0.2
+  flutter_credit_card: ^3.0.5
+  flutter_feather_icons: ^2.0.0+1
   
 
 dev_dependencies:

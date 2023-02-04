@@ -1,3 +1,4 @@
+import 'package:doctors_appointments/NavBar/doctors_screen.dart';
 import 'package:doctors_appointments/NavBar/home_screen.dart';
 import 'package:doctors_appointments/NavBar/notice_screen.dart';
 import 'package:doctors_appointments/NavBar/user_screen.dart';
@@ -15,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _tabs = [
     HomeTab(),
+    DoctorTab(),
     NoticeTab(),
     UserTab(),
   ];
@@ -53,7 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   text: 'Home',
                 ),
                 GButton(
-                  icon: LineIcons.bell,
+                  icon: LineIcons.doctor,
+                  text: 'Doctors',
+                ),
+                GButton(
+                  icon: LineIcons.list,
                   text: 'Notice',
                 ),
                 GButton(
