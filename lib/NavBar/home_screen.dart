@@ -10,6 +10,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../model/user_model.dart';
+
 class HomeTab extends StatefulWidget {
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -21,6 +23,23 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   PageController controller = PageController();
+
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> docIDs = [];
@@ -92,9 +111,9 @@ class _HomeTabState extends State<HomeTab> {
                             ],
                           ),
                           const SizedBox(height: 15),
-                          const Text(
-                            'Hi, Programmer',
-                            style: TextStyle(
+                          Text(
+                            "Hi, ${loggedInUser.firstname}",
+                            style: const TextStyle(
                               color: wColor,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,

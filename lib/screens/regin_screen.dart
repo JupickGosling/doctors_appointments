@@ -37,6 +37,8 @@ class _RegisterScreen extends State<RegisterScreen> {
     super.dispose();
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   Future signUserUp() async {
     showDialog(
       context: context,
