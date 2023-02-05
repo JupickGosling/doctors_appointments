@@ -13,9 +13,10 @@ class _NoticeTabState extends State<NoticeTab> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Уведомления'),
+        title: Text('Записи'),
         backgroundColor: Color(0xFF0C84FF),
       ),
+      body: SafeArea(child: Text("Список записей на прием")),
     );
   }
 }

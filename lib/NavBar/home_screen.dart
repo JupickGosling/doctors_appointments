@@ -11,6 +11,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:line_icons/line_icons.dart';
 
 import '../model/user_model.dart';
+import '../screens/login_screen.dart';
 
 class HomeTab extends StatefulWidget {
   @override
@@ -21,6 +22,12 @@ class _HomeTabState extends State<HomeTab> {
   void signUserOut() {
     FirebaseAuth.instance.signOut();
   }
+
+  // Future<void> logout(BuildContext context) async {
+  //   await FirebaseAuth.instance.signOut();
+  //   Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(builder: (context) => LoginScreen()));
+  // }
 
   PageController controller = PageController();
 
@@ -63,7 +70,7 @@ class _HomeTabState extends State<HomeTab> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 3.4,
+                height: MediaQuery.of(context).size.height / 6,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -89,36 +96,6 @@ class _HomeTabState extends State<HomeTab> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const CircleAvatar(
-                                radius: 30,
-                                backgroundImage: AssetImage("images/user.png"),
-                              ),
-                              const SizedBox(width: 190),
-                              const Icon(
-                                Icons.notifications_outlined,
-                                color: wColor,
-                                size: 30,
-                              ),
-                              IconButton(
-                                onPressed: signUserOut,
-                                icon: const Icon(Icons.logout_outlined),
-                                color: wColor,
-                                iconSize: 30,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          Text(
-                            "Hi, ${loggedInUser.firstname}",
-                            style: const TextStyle(
-                              color: wColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
                           const SizedBox(height: 10),
                           const Text(
                             "Ваше Здоровье – Наш\nГлавный Приоритет",

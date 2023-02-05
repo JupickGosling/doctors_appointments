@@ -50,6 +50,8 @@ dependencies:
   flutter_iconly: ^1.0.2
   flutter_credit_card: ^3.0.5
   flutter_feather_icons: ^2.0.0+1
+  table_calendar: ^3.0.8
+  fluttertoast: ^8.1.2
   
 
 dev_dependencies:

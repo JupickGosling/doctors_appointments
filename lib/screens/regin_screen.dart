@@ -2,9 +2,11 @@ import 'package:doctors_appointments/colors.dart';
 import 'package:doctors_appointments/colors.dart';
 import 'package:doctors_appointments/components/button.dart';
 import 'package:doctors_appointments/components/textField.dart';
+import 'package:doctors_appointments/model/user_model.dart';
 import 'package:doctors_appointments/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,7 +30,7 @@ class _RegisterScreen extends State<RegisterScreen> {
   final firstNameController = TextEditingController();
 
   @override
-  void dispose(){
+  void dispose() {
     emailController.dispose();
     passworController.dispose();
     ageController.dispose();
@@ -49,16 +51,21 @@ class _RegisterScreen extends State<RegisterScreen> {
       },
     );
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passworController.text,
-      );
-      addUserDetails(
-        lastNameController.text,
-        firstNameController.text,
-        emailController.text,
-        int.parse(ageController.text),
-      );
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passworController.text,
+          )
+          .then((value) => {addUserDetails()})
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+      // addUserDetails(
+      //   lastNameController.text,
+      //   firstNameController.text,
+      //   emailController.text,
+      //   int.parse(ageController.text),
+      // );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         errorEmail();
@@ -69,15 +76,34 @@ class _RegisterScreen extends State<RegisterScreen> {
     Navigator.pop(context);
   }
 
-  Future addUserDetails(
-      String lastName, String firstName, String email, int age) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'Last name': lastName,
-      'First name': firstName,
-      'email': email,
-      'age': age,
-    });
+  addUserDetails() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = FirebaseAuth.instance.currentUser;
+
+    UserModel userModel = UserModel();
+
+    userModel.email = user!.email;
+    userModel.uid = user!.uid;
+    userModel.firstname = firstNameController.text;
+    userModel.lastname = lastNameController.text;
+    userModel.age = ageController.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Учетная запись создана");
   }
+
+  // Future addUserDetails(
+  //     String lastName, String firstName, String email, int age) async {
+  //   await FirebaseFirestore.instance.collection('users').add({
+  //     'Last name': lastName,
+  //     'First name': firstName,
+  //     'email': email,
+  //     'age': age,
+  //   });
+  // }
 
   void alertErrorEmail() {
     QuickAlert.show(
