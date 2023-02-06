@@ -51,9 +51,9 @@ class _DoctorTabState extends State<DoctorTab> {
                     return Padding(
                       padding: const EdgeInsets.all(8),
                       child: ListTile(
-                        // leading: Image(image: image),
+                        leading: Image.asset("images/user.png"),
                         title: GetDoctors(documentId: docIDs[index]),
-                        subtitle: GetDoctorsSub(documentId: docIDs[index]),
+                        // subtitle: GetDoctorsSub(documentId: docIDs[index]),
                         tileColor: Colors.grey[200],
                       ),
                     );

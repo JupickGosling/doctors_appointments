@@ -19,20 +19,56 @@ class GetDoctors extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
-          return Text(
-            "${data['Surname']}" +
-                " " +
-                "${data['Firstname']}" +
-                " " +
-                "${data['Patronymic']}",
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w500,
-              color: pColor,
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 1),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${data['Surname']}" +
+                          " " +
+                          "${data['Firstname']}" +
+                          " " +
+                          "${data['Patronymic']}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: pColor,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(children: [
+                  const SizedBox(height: 5),
+                  Text(
+                    "${data['Specialist']}",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: bColor.withOpacity(0.6),
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                    size: 17,
+                  ),
+                  Text(
+                    "${data['Rating']}",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: bColor.withOpacity(0.6),
+                    ),
+                  ),
+                ])
+              ],
             ),
           );
         }
-        return Text('loading..');
+        return const Text('loading..');
       }),
     );
   }
