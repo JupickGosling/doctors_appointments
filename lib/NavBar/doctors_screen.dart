@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../components/doctor_card.dart';
 import '../components/get_doctors.dart';
+import '../components/get_doctors2.dart';
 
 class DoctorTab extends StatefulWidget {
   const DoctorTab({super.key});
@@ -50,7 +51,9 @@ class _DoctorTabState extends State<DoctorTab> {
                     return Padding(
                       padding: const EdgeInsets.all(8),
                       child: ListTile(
+                        // leading: Image(image: image),
                         title: GetDoctors(documentId: docIDs[index]),
+                        subtitle: GetDoctorsSub(documentId: docIDs[index]),
                         tileColor: Colors.grey[200],
                       ),
                     );
