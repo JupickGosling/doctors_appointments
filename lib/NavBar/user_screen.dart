@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../colors.dart';
 import '../model/user_model.dart';
 import '../screens/login_screen.dart';
 
@@ -36,6 +37,7 @@ class _UserTabState extends State<UserTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFD9E4EE),
       appBar: AppBar(
         title: const Text("Профиль"),
         centerTitle: true,
@@ -69,11 +71,32 @@ class _UserTabState extends State<UserTab> {
               SizedBox(
                 height: 15,
               ),
-              ActionChip(
-                label: Text("Logout"),
-                onPressed: () {
-                  signUserOut();
-                },
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 15,
+                ),
+                height: 50,
+                width: 50,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFF2F8FF),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: sdColor,
+                      blurRadius: 4,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: IconButton(
+                    onPressed: () {
+                      signUserOut();
+                    },
+                    icon: Icon(Icons.logout, size: 25, color: pColor),
+                  ),
+                ),
               ),
             ],
           ),

@@ -11,6 +11,7 @@ class _NoticeTabState extends State<NoticeTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFD9E4EE),
       appBar: AppBar(
         centerTitle: true,
         title: Text('Записи'),

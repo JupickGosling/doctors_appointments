@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../colors.dart';
 import '../components/doctor_card.dart';
 import '../components/get_doctors.dart';
-import '../components/get_doctors2.dart';
+import '../screens/appoint_screen.dart';
 
 class DoctorTab extends StatefulWidget {
   const DoctorTab({super.key});
@@ -13,8 +14,7 @@ class DoctorTab extends StatefulWidget {
 }
 
 class _DoctorTabState extends State<DoctorTab> {
-  final CollectionReference _doctors =
-      FirebaseFirestore.instance.collection("doctors");
+  final int index = 0;
 
   List<String> docIDs = [];
 
@@ -32,10 +32,11 @@ class _DoctorTabState extends State<DoctorTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFD9E4EE),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Список докторов'),
-        backgroundColor: Color(0xFF0C84FF),
+        title: const Text('Список докторов'),
+        backgroundColor: const Color(0xFF0C84FF),
       ),
       body: Center(
         child: Column(
@@ -50,11 +51,31 @@ class _DoctorTabState extends State<DoctorTab> {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8),
-                      child: ListTile(
-                        leading: Image.asset("images/user.png"),
-                        title: GetDoctors(documentId: docIDs[index]),
-                        // subtitle: GetDoctorsSub(documentId: docIDs[index]),
-                        tileColor: Colors.grey[200],
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: sdColor,
+                              blurRadius: 6,
+                              spreadRadius: 3,
+                            ),
+                          ],
+                        ),
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.all(10),
+                          leading: Image.asset("images/doctor (5).png"),
+                          title: GetDoctors(documentId: docIDs[index]),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AppointScreen(),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     );
                   },

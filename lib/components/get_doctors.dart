@@ -28,16 +28,33 @@ class GetDoctors extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "${data['Surname']}" +
-                          " " +
-                          "${data['Firstname']}" +
-                          " " +
-                          "${data['Patronymic']}",
+                      "${data['Surname']}",
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: pColor,
                       ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(width: 3),
+                    Text(
+                      "${data['Firstname']}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: pColor,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(width: 3),
+                    Text(
+                      "${data['Patronymic']}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: pColor,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -46,7 +63,7 @@ class GetDoctors extends StatelessWidget {
                   Text(
                     "${data['Specialist']}",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 15,
                       color: bColor.withOpacity(0.6),
                     ),
                   ),
@@ -59,7 +76,7 @@ class GetDoctors extends StatelessWidget {
                   Text(
                     "${data['Rating']}",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 15,
                       color: bColor.withOpacity(0.6),
                     ),
                   ),

@@ -70,7 +70,7 @@ class _HomeTabState extends State<HomeTab> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 6,
+                height: MediaQuery.of(context).size.height / 7,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -87,7 +87,7 @@ class _HomeTabState extends State<HomeTab> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.only(top: 2),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -96,7 +96,7 @@ class _HomeTabState extends State<HomeTab> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 10),
+                          // const SizedBox(height: 5),
                           const Text(
                             "Ваше Здоровье – Наш\nГлавный Приоритет",
                             style: TextStyle(
@@ -149,7 +149,7 @@ class _HomeTabState extends State<HomeTab> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 5),
                     CategorySection(),
                     const SizedBox(height: 10),
                     Padding(
