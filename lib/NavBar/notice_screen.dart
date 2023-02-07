@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctors_appointments/components/get_appoint.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+
+import '../colors.dart';
 
 class NoticeTab extends StatefulWidget {
   const NoticeTab({super.key});
@@ -8,16 +13,87 @@ class NoticeTab extends StatefulWidget {
 }
 
 class _NoticeTabState extends State<NoticeTab> {
+  final int index = 0;
+
+  List<String> appointIDs = [];
+
+  Future getAppontId() async {
+    await FirebaseFirestore.instance.collection("appointments").get().then(
+          (snapshot) => snapshot.docs.forEach(
+            (document) {
+              print(document.reference);
+              appointIDs.add(document.reference.id);
+            },
+          ),
+        );
+  }
+
+  void _delete() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFD9E4EE),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Записи'),
-        backgroundColor: Color(0xFF0C84FF),
+        title: const Text('Список записей'),
+        backgroundColor: const Color(0xFF0C84FF),
       ),
-      body: SafeArea(child: Text("Список записей на прием")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+                child: FutureBuilder(
+              future: getAppontId(),
+              builder: (context, snapshot) {
+                return ListView.builder(
+                  itemCount: appointIDs.length,
+                  itemBuilder: (context, index) {
+                    return Slidable(
+                      endActionPane:
+                          ActionPane(motion: const BehindMotion(), children: [
+                        SlidableAction(
+                          backgroundColor: Colors.red,
+                          icon: Icons.delete,
+                          label: "Отменить",
+                          onPressed: (context) {
+                            _delete();
+                          },
+                        )
+                      ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: sdColor,
+                                blurRadius: 6,
+                                spreadRadius: 3,
+                              ),
+                            ],
+                          ),
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.all(10),
+                            leading: Icon(Icons.calendar_month),
+                            title: Transform.translate(
+                              offset: Offset(-25, 0),
+                              child: GetAppoints(appointId: appointIDs[index]),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ))
+          ],
+        ),
+      ),
     );
   }
 }
