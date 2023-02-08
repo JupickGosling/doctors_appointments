@@ -168,7 +168,7 @@ class _RegisterScreen extends State<RegisterScreen> {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               const Text(
-                "Welcome!",
+                "Sign Up",
                 style: TextStyle(
                   color: gColor,
                   fontSize: 40,
