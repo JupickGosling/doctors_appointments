@@ -7,6 +7,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomeScreen extends StatefulWidget {
+  // HomeScreen({super.key, required this.index});
+  // final index;
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -20,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     NoticeTab(),
     UserTab(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

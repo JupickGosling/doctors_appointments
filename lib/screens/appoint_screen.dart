@@ -1,12 +1,50 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctors_appointments/colors.dart';
-import 'package:doctors_appointments/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:table_calendar/table_calendar.dart';
 
+import '../model/doctor_model.dart';
 import 'book_appoint.dart';
 
-class AppointScreen extends StatelessWidget {
+class AppointScreen extends StatefulWidget {
+  const AppointScreen({super.key, required this.documentId});
+  final String documentId;
+
+  @override
+  State<AppointScreen> createState() => _AppointScreenState();
+}
+
+class _AppointScreenState extends State<AppointScreen> {
+  DoctorModel loggedInDoct = DoctorModel();
+
+  // final int index = 0;
+
+  // List<String> docIDs = [];
+
+  // Future getDocId() async {
+  //   await FirebaseFirestore.instance.collection("doctors").doc().get().then(
+  //         (snapshot) => snapshot.docs.forEach(
+  //           (document) {
+  //             print(document.reference);
+  //             docIDs.add(document.reference.id);
+  //           },
+  //         ),
+  //       );
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("doctors")
+        .doc(widget.documentId)
+        .get()
+        .then((value) {
+      this.loggedInDoct = DoctorModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +56,9 @@ class AppointScreen extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 2,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("images/doctor (1).png"),
+                    image: AssetImage("images/doctor (5).png"),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.only(
@@ -45,7 +83,8 @@ class AppointScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                        padding:
+                            const EdgeInsets.only(top: 5, left: 10, right: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -54,13 +93,13 @@ class AppointScreen extends StatelessWidget {
                                 Navigator.pop(context);
                               },
                               child: Container(
-                                margin: EdgeInsets.all(8),
+                                margin: const EdgeInsets.all(8),
                                 height: 45,
                                 width: 45,
                                 decoration: BoxDecoration(
-                                  color: Color(0xFFF2F8FF),
+                                  color: const Color(0xFFF2F8FF),
                                   borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: sdColor,
                                       blurRadius: 4,
@@ -68,7 +107,7 @@ class AppointScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Icon(
                                     Icons.arrow_back,
                                     color: pColor,
@@ -78,13 +117,13 @@ class AppointScreen extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.all(8),
+                              margin: const EdgeInsets.all(8),
                               height: 45,
                               width: 45,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF2F8FF),
+                                color: const Color(0xFFF2F8FF),
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     color: sdColor,
                                     blurRadius: 4,
@@ -92,7 +131,7 @@ class AppointScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Icon(
                                   Icons.favorite_outline,
                                   color: pColor,
@@ -122,7 +161,7 @@ class AppointScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: 8),
                                 Text(
-                                  "885",
+                                  "${loggedInDoct.patients}",
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -144,7 +183,7 @@ class AppointScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: 8),
                                 Text(
-                                  "5 лет",
+                                  "${loggedInDoct.exp}",
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -166,7 +205,7 @@ class AppointScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: 8),
                                 Text(
-                                  "4.9",
+                                  "${loggedInDoct.rating}",
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -182,27 +221,30 @@ class AppointScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Dr. Lonney",
-                      style: TextStyle(
+                      "${loggedInDoct.surname}" +
+                          " " +
+                          "${loggedInDoct.firstname}\n${loggedInDoct.patronymic}",
+                      style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w500,
                         color: pColor,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Row(
                       children: [
-                        Icon(MdiIcons.heartPulse, color: Colors.red, size: 28),
-                        SizedBox(width: 5),
+                        const Icon(MdiIcons.heartPulse,
+                            color: Colors.red, size: 28),
+                        const SizedBox(width: 5),
                         Text(
-                          "Врач хирург",
+                          "${loggedInDoct.specialist}",
                           style: TextStyle(
                             fontSize: 17,
                             color: bColor.withOpacity(0.6),
@@ -210,7 +252,7 @@ class AppointScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Text(
                       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                       style: TextStyle(
@@ -220,7 +262,7 @@ class AppointScreen extends StatelessWidget {
                       ),
                       textAlign: TextAlign.justify,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Material(
                       color: pColor,
                       borderRadius: BorderRadius.circular(10),
@@ -229,14 +271,15 @@ class AppointScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => BookAppoint(),
+                              builder: (context) =>
+                                  BookAppoint(documentId: widget.documentId),
                             ),
                           );
                         },
-                        child: Container(
+                        child: SizedBox(
                           height: 60,
                           width: MediaQuery.of(context).size.width,
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               "Записаться на прием",
                               style: TextStyle(

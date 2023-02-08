@@ -72,7 +72,8 @@ class _DoctorsSectionState extends State<DoctorsSection> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => AppointScreen(),
+                                          builder: (context) => AppointScreen(
+                                              documentId: docIDs[index]),
                                         ));
                                   },
                                   child: ClipRRect(
@@ -125,7 +126,8 @@ class _DoctorsSectionState extends State<DoctorsSection> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => AppointScreen(),
+                                      builder: (context) => AppointScreen(
+                                          documentId: docIDs[index]),
                                     ),
                                   );
                                 },

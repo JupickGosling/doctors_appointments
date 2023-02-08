@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctors_appointments/components/get_appoint.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -18,7 +19,11 @@ class _NoticeTabState extends State<NoticeTab> {
   List<String> appointIDs = [];
 
   Future getAppontId() async {
-    await FirebaseFirestore.instance.collection("appointments").get().then(
+    await FirebaseFirestore.instance
+        .collection('appointments')
+        .where('user', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+        .get()
+        .then(
           (snapshot) => snapshot.docs.forEach(
             (document) {
               print(document.reference);
@@ -28,7 +33,12 @@ class _NoticeTabState extends State<NoticeTab> {
         );
   }
 
-  void _delete() {}
+  void _delete(String appointId) async {
+    await FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(appointId)
+        .delete();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +68,7 @@ class _NoticeTabState extends State<NoticeTab> {
                           icon: Icons.delete,
                           label: "Отменить",
                           onPressed: (context) {
-                            _delete();
+                            _delete(appointIDs[index]);
                           },
                         )
                       ]),
@@ -90,7 +100,7 @@ class _NoticeTabState extends State<NoticeTab> {
                   },
                 );
               },
-            ))
+            )),
           ],
         ),
       ),

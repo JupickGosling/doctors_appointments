@@ -1,12 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctors_appointments/model/appoint_model.dart';
+import 'package:doctors_appointments/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../NavBar/notice_screen.dart';
 import '../colors.dart';
 import '../components/button2.dart';
+import '../model/doctor_model.dart';
 
 class BookAppoint extends StatefulWidget {
-  const BookAppoint({super.key});
+  const BookAppoint({super.key, required this.documentId});
+  final String documentId;
 
   @override
   State<BookAppoint> createState() => _BookAppointState();
@@ -20,6 +29,41 @@ class _BookAppointState extends State<BookAppoint> {
   bool _isWeekend = false;
   bool _dateSelected = false;
   bool _timeSelected = false;
+  DoctorModel loggedInDoct = DoctorModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("doctors")
+        .doc(widget.documentId)
+        .get()
+        .then((value) {
+      this.loggedInDoct = DoctorModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
+  _enroll() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = FirebaseAuth.instance.currentUser;
+
+    AppointModel appointModel = AppointModel();
+
+    appointModel.doctor =
+        "${loggedInDoct.surname} ${loggedInDoct.firstname} ${loggedInDoct.patronymic}";
+    appointModel.user = user!.uid;
+    appointModel.date =
+        '${_currentDay.day}.${_currentDay.month}.${_currentDay.year}';
+    appointModel.status = 'Активно';
+    appointModel.time = '9:00 AM';
+
+    await firebaseFirestore
+        .collection("appointments")
+        .doc()
+        .set(appointModel.toMap());
+    Fluttertoast.showToast(msg: "Вы успешно записались на прием!");
+  }
 
   Widget _tableCalendar() {
     return SafeArea(
@@ -181,7 +225,15 @@ class _BookAppointState extends State<BookAppoint> {
               child: Button(
                 width: double.infinity,
                 title: "Записаться",
-                onPressed: () {},
+                onPressed: () {
+                  _enroll();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
+                },
                 disable: _timeSelected && _dateSelected ? false : true,
               ),
             ),

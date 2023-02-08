@@ -49,19 +49,6 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> docIDs = [];
-
-    Future getDocId() async {
-      await FirebaseFirestore.instance.collection('users').get().then(
-            (snapshot) => snapshot.docs.forEach(
-              (document) {
-                print(document.reference);
-                docIDs.add(document.reference.id);
-              },
-            ),
-          );
-    }
-
     return Scaffold(
       backgroundColor: const Color(0xFFD9E4EE),
       body: SafeArea(

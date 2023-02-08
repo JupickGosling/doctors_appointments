@@ -8,6 +8,8 @@ class GetAppoints extends StatelessWidget {
 
   final String appointId;
 
+  bool click = true;
+
   @override
   Widget build(BuildContext context) {
     CollectionReference doctors =
@@ -17,8 +19,7 @@ class GetAppoints extends StatelessWidget {
       future: doctors.doc(appointId).get(),
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
+          Map data = snapshot.data!.data() as Map;
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 1),
             child: Column(

@@ -83,7 +83,7 @@ class _RegisterScreen extends State<RegisterScreen> {
     UserModel userModel = UserModel();
 
     userModel.email = user!.email;
-    userModel.uid = user!.uid;
+    userModel.uid = user.uid;
     userModel.firstname = firstNameController.text;
     userModel.lastname = lastNameController.text;
     userModel.age = ageController.text;

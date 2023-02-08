@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../colors.dart';
-import '../components/doctor_card.dart';
 import '../components/get_doctors.dart';
 import '../screens/appoint_screen.dart';
 
@@ -71,7 +70,8 @@ class _DoctorTabState extends State<DoctorTab> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AppointScreen(),
+                                builder: (context) =>
+                                    AppointScreen(documentId: docIDs[index]),
                               ),
                             );
                           },
