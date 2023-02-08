@@ -16,6 +16,9 @@ class _CatAudiologistState extends State<CatAudiologist> {
         title: Text('Отоларинголог'),
         backgroundColor: Color(0xFF0C84FF),
       ),
+      body: Container(
+        color: const Color(0xFFD9E4EE),
+      ),
     );
   }
 }

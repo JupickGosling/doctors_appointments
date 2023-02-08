@@ -16,6 +16,9 @@ class _CatNeurologistState extends State<CatNeurologist> {
         title: Text('Невролог'),
         backgroundColor: Color(0xFF0C84FF),
       ),
+      body: Container(
+        color: const Color(0xFFD9E4EE),
+      ),
     );
   }
 }

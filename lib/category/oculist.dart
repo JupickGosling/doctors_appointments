@@ -16,6 +16,9 @@ class _CatOculistState extends State<CatOculist> {
         title: Text('Окулист'),
         backgroundColor: Color(0xFF0C84FF),
       ),
+      body: Container(
+        color: const Color(0xFFD9E4EE),
+      ),
     );
   }
 }
