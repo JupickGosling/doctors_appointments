@@ -65,6 +65,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xFF0C84FF),
         elevation: 0,
+        title: Text("Восстановление пароля"),
       ),
       backgroundColor: Colors.grey[200],
       body: Column(
