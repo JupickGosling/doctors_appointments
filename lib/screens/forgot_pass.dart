@@ -66,6 +66,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
         backgroundColor: Color(0xFF0C84FF),
         elevation: 0,
       ),
+      backgroundColor: Colors.grey[200],
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
