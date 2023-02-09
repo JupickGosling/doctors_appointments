@@ -3,6 +3,7 @@ import 'package:doctors_appointments/components/get_appoint.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../colors.dart';
 
@@ -38,6 +39,7 @@ class _NoticeTabState extends State<NoticeTab> {
         .collection('appointments')
         .doc(appointId)
         .delete();
+    Fluttertoast.showToast(msg: "Вы успешно отменили запись на прием");
   }
 
   @override

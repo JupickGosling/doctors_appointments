@@ -11,6 +11,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '../NavBar/notice_screen.dart';
 import '../colors.dart';
 import '../components/button2.dart';
+import '../model/dataconverted.dart';
 import '../model/doctor_model.dart';
 
 class BookAppoint extends StatefulWidget {
@@ -48,6 +49,8 @@ class _BookAppointState extends State<BookAppoint> {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = FirebaseAuth.instance.currentUser;
 
+    final getTime = DataConverted.getTime(_currentIndex!);
+
     AppointModel appointModel = AppointModel();
 
     appointModel.doctor =
@@ -56,7 +59,7 @@ class _BookAppointState extends State<BookAppoint> {
     appointModel.date =
         '${_currentDay.day}.${_currentDay.month}.${_currentDay.year}';
     appointModel.status = 'Активно';
-    appointModel.time = '9:00 AM';
+    appointModel.time = getTime;
 
     await firebaseFirestore
         .collection("appointments")
@@ -202,7 +205,7 @@ class _BookAppointState extends State<BookAppoint> {
                           ),
                           alignment: Alignment.center,
                           child: Text(
-                            "${index + 9}:00 ${index + 9 > 11 ? "PM" : "AM"}",
+                            "${index + 9}:${index + 9 > 12 ? "30" : "00"} ${index + 9 > 11 ? "PM" : "AM"}",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color:
@@ -212,7 +215,7 @@ class _BookAppointState extends State<BookAppoint> {
                         ),
                       );
                     },
-                    childCount: 8,
+                    childCount: 10,
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
